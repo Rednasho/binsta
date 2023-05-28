@@ -1,0 +1,52 @@
+{% extends '/layout/app.twig' %}
+
+{% block title %}
+    Binsta | Signup
+{% endblock %}
+
+{% block content %}
+    <div class="flex w-full justify-center">
+        <div class="w-1/2 flex flex-col items-center bg-white shadow-xl mt-10 rounded-xl">
+            <div class="flex bg-blue-500 w-full text-white justify-center rounded-tr-xl rounded-tl-xl">
+                <h1 class="text-3xl w-3/4 font-bold py-5">Signup</h1>
+            </div>
+            <form action="#" method="post" class="flex flex-col w-full justify-center pt-10 items-center">
+                <div class="flex flex-col w-3/4 items-center">
+                    <label for="username" class="block w-full text-2xl">Username:</label>
+                    <input type="text" name="username" id="username" class="border-gray-600 ps-3 py-2 w-full border rounded">
+                </div>
+                <div class="w-3/4 flex-col flex items-center mt-3">
+                    <label for="password" class="block w-full text-2xl">Password:</label>
+                    <input type="password" name="password" id="password" class="border-gray-600 ps-3 py-2 w-full border rounded">
+                </div>
+                <div class="w-3/4 flex-col flex items-center mt-3">
+                    <label for="passwordrepeat" class="block w-full text-2xl">Repeat password:</label>
+                    <input type="password" name="passwordrepeat" id="passwordrepeat" class="border-gray-600 ps-3 py-2 w-full border rounded">
+                </div>
+                <div class="w-3/4 flex items-center mt-3">
+                    <input type="submit" value="Signup" class="bg-green-600 hover:bg-green-700 rounded cursor-pointer font-bold text-2xl w-full text-white py-2">
+                </div>
+            </form>
+            {% if error == 'userexists' %}
+                <div class="bg-red-300 rounded w-3/4 mt-3 py-3 text-center font-bold text-red-600">
+                    <p>That username is already in use!</p>
+                </div>
+            {% elseif error == 'emptyusn'%}
+                <div class="bg-red-300 rounded w-3/4 mt-3 py-3 text-center font-bold text-red-600">
+                    <p>Please fill in a username!</p>
+                </div>
+            {% elseif error == 'emptypwd'%}
+                <div class="bg-red-300 rounded w-3/4 mt-3 py-3 text-center font-bold text-red-600">
+                    <p>Please fill in a password!</p>
+                </div>
+            {% elseif error == 'nopwdmatch'%}
+                <div class="bg-red-300 rounded w-3/4 mt-3 py-3 text-center font-bold text-red-600">
+                    <p>Passwords did not match, please try again!</p>
+                </div>
+            {% endif %}
+            <div class="flex w-full justify-end p-2 pe-5">
+                <p class="pe-1">If you don't have an account</p><a href="/user/login" class="text-blue-500 underline">Login here!</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

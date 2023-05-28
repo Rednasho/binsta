@@ -1,0 +1,12 @@
+{% extends '/layout/app.twig' %}
+{% block title %}
+    {{ errorCode }}
+{% endblock %}
+
+{% block body %}
+    <div class="w-full flex bg-red-300 justify-center">
+        {% if errorCode is not empty %}
+            <p class="text-red-600 text-6xl py-10">{{ errorCode }} ERROR: {{ errorMessage }}</p>
+        {% endif %}
+    </div>
+{% endblock %}

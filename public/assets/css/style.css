@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+.title {
+    font-family: 'Lobster', cursive;
+}
+
+#post-code {
+    height: 600px;
+}
+
+#profile-code-post {
+    height: 250px;
+}
+
+pre {
+    word-break: break-all;
+}
+
+.show {
+    display: flex;
+}

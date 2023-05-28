@@ -1,0 +1,39 @@
+{% extends '/layout/app.twig' %}
+
+{% block title %}
+    Binsta | Login
+{% endblock %}
+
+{% block content %}
+    {% for userItem in user %}
+        <div class="flex w-full justify-center">
+            <div class="w-1/2 flex flex-col items-center bg-white shadow-xl mt-10 rounded-xl">
+                <div class="flex bg-blue-500 w-full text-white justify-center rounded-tr-xl rounded-tl-xl">
+                    <h1 class="text-3xl w-3/4 font-bold py-5">Create Post</h1>
+                </div>
+                <form action="#" method="post" class="flex flex-col w-3/4 justify-center py-10 items-start" enctype="multipart/form-data">
+                    <div class="flex flex-col w-full items-center">
+                        <label for="description" class="block w-full text-2xl">Small description:</label>
+                        <input type="text" name="description" id="description" class="border-gray-600 ps-3 py-2 w-full border rounded">
+                    </div>
+                    <div class="flex flex-col w-full items-center mt-3">
+                        <label for="description" class="block w-full text-2xl">Type your code:</label>
+                        <textarea id="code-input" name="code-input" rows="8" cols="40" class="w-full ps-3 pt-3 rounded border border-black"></textarea>
+                    </div>
+                    <div class="flex flex-col w-full items-center mt-3">
+                        <label for="code-language" class="block w-full text-2xl">Choose your language:</label>
+                        <select name="code-language" class="w-full border border-black rounded py-2" id="post-language">
+                            <option value="html">HTML</option>
+                            <option value="css">CSS</option>
+                            <option value="javascript">JavaScript</option>
+                            <option value="php">PHP</option>
+                        </select>
+                    </div>
+                    <div class="w-full flex items-center mt-3">
+                        <input type="submit" value="Post" onclick="saveCodeSnippet()" class="bg-green-600 hover:bg-green-700 rounded cursor-pointer font-bold text-2xl w-full text-white py-2">
+                    </div>
+                </form>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

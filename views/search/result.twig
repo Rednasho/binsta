@@ -1,0 +1,18 @@
+{% extends '/layout/app.twig' %}
+
+{% block title %}
+    Binsta | Users
+{% endblock %}
+
+{% block content %}
+    <div class="flex flex-col w-full items-center mb-20">
+        <h3 class="flex w-3/4 mt-10 font-bold text-3xl">{{ usersFound }} users found:</h3>
+        <div class="flex items-center flex-wrap w-3/4">
+            {% for result in results %}
+                <div class="flex bg-white justify-center rounded-xl me-5 shadow-xl mt-5">
+                    <a href="/search/profile/{{ result.id }}" class=" p-10 text-3xl">{{ result.username }}</a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
