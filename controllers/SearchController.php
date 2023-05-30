@@ -10,7 +10,9 @@ class SearchController extends BaseController
         $results = R::find('users', 'username LIKE :username', [':username' => $searchPattern]);
         $usersFound = count($results);
 
-        displayTwig('/search/result.twig', ['results' => $results, 'usersFound' => $usersFound]);
+        $profileImg = $this->getProfileImg();
+
+        displayTwig('/search/result.twig', ['results' => $results, 'profileImg' => $profileImg, 'usersFound' => $usersFound]);
     }
 
     public function profile($id)
@@ -20,6 +22,18 @@ class SearchController extends BaseController
 
         $profile = R::find('users', 'id LIKE :id', [':id' => $id]);
         $posts = R::find('posts', 'user_id LIKE :userid', [':userid' => $id]);
+        $likes = R::findAll('likes');
+
+        foreach ($posts as $post) {
+            $liked = false;
+            foreach ($likes as $like) {
+                if ($like->post_id == $post->id && $like->user_id == $_SESSION['userid']) {
+                    $liked = true;
+                    break;
+                }
+            }
+            $post['liked'] = $liked ? 'yes' : 'no';
+        }
 
         $profileImg = $this->getProfileImg();
 

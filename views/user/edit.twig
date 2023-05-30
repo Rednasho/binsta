@@ -7,7 +7,7 @@
 {% block content %}
     {% for profileItem in profile %}
         <div class="flex w-full justify-center">
-            <div class="w-1/2 flex flex-col items-center bg-white shadow-xl my-10 rounded-xl">
+            <div class="w-1/2 max-md:w-full flex flex-col items-center bg-white shadow-xl my-10 rounded-xl">
                 <div class="flex bg-blue-500 w-full text-white justify-center rounded-tr-xl rounded-tl-xl">
                     <h1 class="text-3xl w-3/4 font-bold py-5">Edit Profile</h1>
                 </div>
@@ -23,6 +23,10 @@
                     <div class="flex flex-col w-full items-center">
                         <label for="username" class="block w-full text-2xl">Edit username:</label>
                         <input type="text" name="username" id="username" value="{{ profileItem.username }}" class="border-gray-600 ps-3 py-2 w-full border rounded">
+                    </div>
+                    <div class="flex flex-col w-full items-center mt-3">
+                        <label for="bio" class="block w-full text-2xl">Edit bio:</label>
+                        <textarea name="bio" id="bio" class="border-gray-600 ps-3 py-2 w-full border rounded">{{ profileItem.bio }}</textarea>
                     </div>
                     <div class="w-full flex-col flex items-center mt-3">
                         <label for="currentpassword" class="block w-full text-2xl">Current password:</label>
@@ -55,6 +59,10 @@
                 {% elseif error == 'wrongpwd'%}
                     <div class="bg-red-300 rounded w-3/4 mt-3 py-3 text-center font-bold text-red-600">
                         <p>Wrong password, please try again!</p>
+                    </div>
+                {% elseif error == 'wrongrepeat'%}
+                    <div class="bg-red-300 rounded w-3/4 mt-3 py-3 text-center font-bold text-red-600">
+                        <p>Repeated password did not match!</p>
                     </div>
                 {% endif %}
                 <div class="flex w-full justify-end p-2 pe-5">

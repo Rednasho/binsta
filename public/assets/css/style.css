@@ -5,7 +5,7 @@
 }
 
 #post-code {
-    height: 600px;
+    max-height: 600px;
 }
 
 #profile-code-post {

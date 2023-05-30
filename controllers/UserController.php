@@ -6,6 +6,10 @@ class UserController extends BaseController
 {
     public function login($id, $session, $error)
     {
+//        if (!isset($_SESSION['userid'])) {
+//            header('location: ?');
+//            exit();
+//        }
         $id = null;
         $session = null;
         $profileImg = $this->getProfileImg();
@@ -105,7 +109,7 @@ class UserController extends BaseController
         $profileImg = $this->getProfileImg();
 
         foreach ($posts as $post) {
-            $post['code_input'] = htmlspecialchars_decode($post['code_input']);
+            $post->code_input = htmlspecialchars_decode($post->code_input);
         }
 
 
@@ -125,16 +129,16 @@ class UserController extends BaseController
 
     public function editPost()
     {
+
         $file = $_FILES['pfp-upload'];
         $username = htmlspecialchars(trim($_POST['username']));
         $username = preg_replace('/\s+/', '-', $username);
         $username = preg_replace('/-+/', '-', $username);
         $username = strtolower($username);
+        $bio = htmlspecialchars(trim($_POST['bio']));
         $currentPassword = htmlspecialchars($_POST['currentpassword']);
         $newPassword = htmlspecialchars($_POST['newpassword']);
         $repeatPassword = htmlspecialchars($_POST['repeatpassword']);
-
-//        $profile = R::find('users', 'id like :id', [':id' => $_SESSION['userid']]);
 
         $userBean = R::load('users', $_SESSION['userid']);
         if (!empty($username)) {
@@ -149,7 +153,8 @@ class UserController extends BaseController
                 if ($newPassword === $repeatPassword) {
                     $userBean->password = password_hash($newPassword, PASSWORD_DEFAULT);
                 } else {
-                    header('location: ?error=');
+                    header('location: ?error=wrongrepeat');
+                    exit();
                 }
             } else {
                 header('location: ?error=wrongpwd');
@@ -185,11 +190,10 @@ class UserController extends BaseController
             move_uploaded_file($file['tmp_name'], $destinationPath);
 
             $userBean->profile_img = $uniqueName;
-
         }
+        $userBean->bio = $bio;
 
         R::store($userBean);
-
 
         header('location: /user/profile');
         exit();

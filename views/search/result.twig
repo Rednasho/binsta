@@ -9,8 +9,9 @@
         <h3 class="flex w-3/4 mt-10 font-bold text-3xl">{{ usersFound }} users found:</h3>
         <div class="flex items-center flex-wrap w-3/4">
             {% for result in results %}
-                <div class="flex bg-white justify-center rounded-xl me-5 shadow-xl mt-5">
-                    <a href="/search/profile/{{ result.id }}" class=" p-10 text-3xl">{{ result.username }}</a>
+                <div class="flex items-center bg-white justify-center rounded-xl me-5 shadow-xl p-5 mt-5">
+                    <img src="/public/assets/imgs/{% if result.profile_img == 'profile-placeholder.png' %}default/{% else %}profile/{% endif %}{{ result.profile_img }}" class="h-20 object-cover rounded-full w-20" alt="profile-img">
+                    <a href="/search/profile/{{ result.id }}" class="ps-4 text-3xl">{{ result.username }}</a>
                 </div>
             {% endfor %}
         </div>

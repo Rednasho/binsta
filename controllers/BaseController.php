@@ -8,7 +8,7 @@ class BaseController
     {
         $path = '/user/login';
         if (!isset($id)) {
-            $path = '/user/login?error=notloggedin';
+            $path = '/user/login';
         }
         if (!isset($_SESSION['userid'])) {
             header('location: ' . $path);

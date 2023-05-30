@@ -8,15 +8,18 @@
     {% for profileItem in profile %}
         <div class="flex flex-col items-center justify-center w-full">
             <div class="flex justify-between w-3/4 mt-10">
-                <div class="flex">
+                <div class="flex max-md:flex-col">
                     <div class="relative inline-block">
-                        <img id="profile-picture" class="h-36 w-36 object-cover rounded-full" src="/public/assets/imgs/{{ profileImg }}" alt="Profile Picture">
+                        <img id="profile-picture" class="h-36 w-36 object-cover rounded-full" src="/public/assets/imgs{{ profileImg }}" alt="Profile Picture">
                     </div>
-                    <div class="ms-10 flex">
-                        <h1 class="text-3xl">{{ profileItem.username }}</h1>
-                        <a href="/user/edit">
-                            <i class="fa-solid fa-gear text-3xl ms-3 mt-1"></i>
-                        </a>
+                    <div class="ms-10 flex flex-col max-md:ms-0 flex">
+                        <div class="flex">
+                            <h1 class="text-3xl">{{ profileItem.username }}</h1>
+                            <a href="/user/edit">
+                                <i class="fa-solid fa-gear text-3xl ms-3 mt-1"></i>
+                            </a>
+                        </div>
+                        <p>{{ profileItem.bio }}</p>
                     </div>
                 </div>
                 <div>

@@ -9,12 +9,13 @@
         <div class="flex flex-col items-center justify-center w-full">
             {% for profileItem in profile %}
                 <div class="flex justify-between w-3/4 mt-10">
-                    <div class="flex">
+                    <div class="flex max-md:flex-col">
                         <div class="relative inline-block">
-                            <img id="profile-picture" class="h-36 w-36 object-cover rounded-full" src="/public/assets/imgs/{{ profileImg }}" alt="Profile Picture">
+                            <img id="profile-picture" class="h-36 w-36 object-cover rounded-full" src="/public/assets/imgs/{% if profileItem.profile_img == 'profile-placeholder.png' %}default/{% else %}profile/{% endif %}{{ profileItem.profile_img }}" alt="Profile Picture">
                         </div>
-                        <div class="ms-10 flex">
+                        <div class="ms-10 max-md:ms-0 flex flex-col">
                             <h1 class="text-3xl">{{ profileItem.username }}</h1>
+                            <p>{{ profileItem.bio }}</p>
                         </div>
                     </div>
                 </div>
@@ -23,13 +24,22 @@
                     <div class="flex flex-wrap w-full mb-20">
                         {% for post in posts %}
                             <div class="flex flex-col bg-white w-80 rounded-xl shadow-xl me-5 mb-5 mt-10" id="profile_card">
-                                <img id="profile-post-image" src="/public/assets/imgs/post/{{ post.image }}" alt="post" class="object-cover w-full">
-                                <div class="flex items-center pt-2 ps-5">
-                                    <p><span class="font-bold">{{ post.likes }}</span> likes</p>
+                                <div class="w-full h-60">
+                                    <pre class="h-full w-full"><code class="language-{{ post.code_language }}">{{ post.code_input }}</code></pre>
                                 </div>
-                                <div class="flex ps-5 pb-5">
+                                <div class="flex items-center pt-2 ps-5">
+                                    <button id="likeBtn" data-postId="{{ post.id }}">
+                                        {% if post.liked != 'yes' %}
+                                            <i class="fa-regular fa-heart text-3xl"></i>
+                                        {% else %}
+                                            <i class="fa-solid fa-heart text-red-500 text-3xl"></i>
+                                        {% endif %}
+                                    </button>
+                                    <p class="ps-3"><span class="font-bold" id="{{ post.id }}">{{ post.likes }}</span> likes</p>
+                                </div>
+                                <div class="flex flex-col ps-5 pb-5">
                                     <a href="" class="font-bold">{{ profileItem.username }}</a>
-                                    <p class="ps-3 w-1/2">{{ post.description }}</p>
+                                    <p class="w-5/6">{{ post.description }}</p>
                                 </div>
                             </div>
                         {% endfor %}

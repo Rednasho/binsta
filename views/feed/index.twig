@@ -11,48 +11,54 @@
                 {% for user in users %}
                     {% if post.user_id == user.id %}
                         <div class="flex flex-col w-full bg-white rounded-xl shadow-xl mt-10" id="card">
-                            <div class="flex items-center py-5 ps-5 ">
+                            <div class="flex justify-between items-center py-5 ps-5 ">
                                 <a href="/search/profile/{{ user.id }}" class="flex items-center">
-                                    <img src="/public/assets/imgs/default/profile-placeholder.png" class="h-10 w-10 object-cover rounded-full" alt="pfp">
+                                    <img src="/public/assets/imgs/{% if user.profile_img == 'profile-placeholder.png' %}default/{% else %}profile/{% endif %}{{ user.profile_img }}" class="h-10 w-10 object-cover rounded-full" alt="pfp">
                                     <h1 class="ps-3 font-bold">{{ user.username }}</h1>
                                 </a>
+                                <div class="flex me-3 rounded-lg h-full p-2 bg-gray-300">
+                                    <p>{{ post.code_language }}</p>
+                                </div>
                             </div>
                             <div class="w-full">
                                 <pre id="post-code"><code class="language-{{ post.code_language }}">{{ post.code_input }}</code></pre>
                             </div>
                             <div class="flex items-center pt-2 ps-5">
-                                <a href="/feed/like/{{ post.id }}">
+                                <button id="likeBtn" data-postId="{{ post.id }}">
                                     {% if post.liked != 'yes' %}
                                         <i class="fa-regular fa-heart text-3xl"></i>
-                                        {% else %}
+                                    {% else %}
                                         <i class="fa-solid fa-heart text-red-500 text-3xl"></i>
                                     {% endif %}
-                                </a>
-                                <p class="ps-3"><span class="font-bold">{{ post.likes }}</span> likes</p>
+                                </button>
+                                <p class="ps-3"><span class="font-bold" id="{{ post.id }}">{{ post.likes }}</span> likes</p>
                             </div>
                             <div class="flex ps-5 bg-white flex-wrap">
                                 <a href="/search/profile/{{ user.id }}" class="font-bold">{{ user.username }}</a>
                                 <p class="ps-3 w-1/2">{{ post.description }}</p>
                             </div>
                             <hr class="border-0.5 border-black my-5">
-                            <form action="/feed/comment/{{ post.id }}" method="post" class="flex items-center">
-                                <input type="text" name="comment" class="focus:outline-none ps-5 mb-5" placeholder="Send message...">
+                            <form action="/feed/comment/{{ post.id }}" id="comment-form" data-postid="{{ post.id }}" method="post" class="flex justify-between items-center">
+                                <input type="text" name="comment" id="input{{ post.id }}" class="focus:outline-none w-full ps-5 mb-5" placeholder="Send message...">
+                                <input type="submit" class="mb-5 pe-5 text-blue-700 cursor-pointer max-sm:hidden" value="Send">
                             </form>
-                            <div class="ps-5 pb-5">
-                                <button class="text-blue-700 flex" id="show-comments">Show comments</button>
+                            <div class="ps-5">
+                                <button class="text-blue-700 flex" data-postshowid="{{ post.id }}" id="show-comments{{ post.id }}">Show comments</button>
                             </div>
-                            <div class="hidden flex-col ps-5 bg-white flex-wrap rounded-lg pb-5" id="comments">
+                            <div class="hidden flex-col ps-5 bg-gray-100 flex-wrap pb-5" data-postid="{{ post.id }}" id="comments{{ post.id }}">
                                 {% for comment in comments %}
                                     {% if post.id == comment.post_id %}
-                                        {% if user.id == comment.user_id %}
-                                            <a href="/search/profile/{{ user.id }}" class="font-bold">{{ user.username }}</a>
-                                        {% endif %}
+                                            {% for user in users %}
+                                                {% if user.id == comment.user_id %}
+                                                    <a href="/search/profile/{{ comment.user_id }}" id="comment" class="font-bold mt-3">{{ user.username }}</a>
+                                                {% endif %}
+                                            {% endfor %}
                                         <p>{{ comment.comment }}</p>
                                     {% endif %}
                                 {% endfor %}
                             </div>
-                            <div class="ps-5 pb-5">
-                                <button class="text-blue-700 hidden" id="hide-comments">Hide comments</button>
+                            <div class="ps-5 py-3">
+                                <button class="text-blue-700 hidden" data-posthideid="{{ post.id }}" id="hide-comments{{ post.id }}">Hide comments</button>
                             </div>
                         </div>
                     {% endif %}

@@ -26,13 +26,13 @@
     <header class="flex justify-center text-white bg-blue-600 py-7">
         <div class="flex justify-between items-center w-3/4">
             <div class="title">
-                <a href="/" class="text-6xl">Binsta</a>
+                <a href="/" class="text-6xl max-md:text-4xl">Binsta</a>
             </div>
             <div>
                 <form action="/search/result" method="post">
                     <div class="flex relative items-center">
                         <input type="text" name="finduser" id="finduser" placeholder="Search user..." class="ps-3 py-3 px-40 max-md:px-0 max-md:hidden max-md:ps-3 text-black rounded">
-                        <button type="submit" class="flex items-center justify-center text-lg max-md:text-2xl text-white bg-gray-500 rounded-br rounded-tr absolute right-0 w-1/6 h-full">
+                        <button type="submit" class="flex items-center justify-center text-lg max-md:hidden text-white bg-blue-400 rounded-br rounded-tr absolute right-0 w-1/6 h-full">
                             <i class="fa-solid fa-magnifying-glass pt-1"></i>
                         </button>
                     </div>
@@ -50,7 +50,8 @@
                     </a>
                 </li>
                 <li class="me-5">
-                    <a href="/user/profile">
+                    {{ session }}
+                    <a href="/user/{% if session is empty %}profile{% else %}login{% endif %}">
                         <img src="/public/assets/imgs{{ profileImg }}" alt="pfp" class="rounded-full object-cover bg-blue-300 w-10 h-10">
                     </a>
                 </li>
