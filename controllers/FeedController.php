@@ -6,6 +6,8 @@ class FeedController extends BaseController
 {
     public function index($id, $userid)
     {
+        $id = null; // Moet van BLAST
+
         $posts = R::findAll('posts');
         $users = R::findAll('users');
         $comments = R::findAll('comments');
@@ -35,8 +37,8 @@ class FeedController extends BaseController
         displayTwig('/feed/index.twig', ['posts' => $posts, 'users' => $users, 'comments' => $comments, 'profileImg' => $profileImg]);
     }
 
-    public function likePost($id) {
-
+    public function likePost($id)
+    {
         if (!isset($_SESSION['userid'])) {
             header('Content-type: application/json');
             echo '{"error":"error=notloggedin"}';
@@ -93,7 +95,8 @@ class FeedController extends BaseController
         echo '{"username":"' . $user->username . '", "userid":' . $comments->user_id . '}';
     }
 
-    private function checkIfLiked($postId, $userId) {
+    private function checkIfLiked($postId, $userId)
+    {
         $post = R::load('posts', $postId);
         if ($post !== null) {
             $likes = R::count('likes', 'post_id = :post_id AND user_id = :user_id', [':post_id' => $postId, ':user_id' => $userId]);

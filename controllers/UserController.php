@@ -6,10 +6,6 @@ class UserController extends BaseController
 {
     public function login($id, $session, $error)
     {
-//        if (!isset($_SESSION['userid'])) {
-//            header('location: ?');
-//            exit();
-//        }
         $id = null;
         $session = null;
         $profileImg = $this->getProfileImg();
