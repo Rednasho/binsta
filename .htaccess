@@ -2,8 +2,6 @@
     RewriteEngine On
     RewriteCond ${SCRIPT_FILENAME} !-d
     RewriteCond ${SCRIPT_FILENAME} !-f
-    RewriteCond %{REQUEST_URI} !^/public/assets/imgs/ [NC]
-    RewriteCond %{REQUEST_URI} !^/public/assets/js/ [NC]
-    RewriteCond %{REQUEST_URI} !^/public/assets/css/ [NC]
+    RewriteCond %{REQUEST_URI} !^/public/assets/ [NC]
     RewriteRule ^(.*)$ public/index.php?params=$1 [L,QSA]
 </IfModule>
