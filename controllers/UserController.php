@@ -4,10 +4,10 @@ use RedBeanPHP\R as R;
 
 class UserController extends BaseController
 {
-    public function login($id, $session, $error)
+    public function login()
     {
-        $id = null;
-        $session = null;
+        $error = $_GET['error'] ?? null;
+
         $profileImg = $this->getProfileImg();
         displayTwig('/user/login.twig', ['error' => $error, 'profileImg' => $profileImg]);
     }
@@ -31,7 +31,6 @@ class UserController extends BaseController
 
             $password = $user->password;
             if (password_verify($_POST['password'], $password)) {
-                session_start();
                 $_SESSION['userid'] = $user->id;
                 header('location: /user/profile');
                 exit();
@@ -45,17 +44,16 @@ class UserController extends BaseController
         }
     }
 
-    public function signup($id, $session, $error)
+    public function signup()
     {
-        $id = null;
-        $session = null;
+        $error = $_GET['error'] ?? null;
+
         $profileImg = $this->getProfileImg();
         displayTwig('/user/signup.twig', ['error' => $error, 'profileImg' => $profileImg]);
     }
 
     public function signupPost()
     {
-
         $username = htmlspecialchars(trim($_POST['username']));
         $username = preg_replace('/\s+/', '-', $username);
         $username = preg_replace('/-+/', '-', $username);
@@ -98,9 +96,8 @@ class UserController extends BaseController
     {
         $this->authorizeUser($_SESSION['userid']);
 
-        $profile = R::find('users', 'id LIKE :userid', [':userid' => $_SESSION['userid']]);
+        $profile = R::findOne('users', 'id LIKE :userid', [':userid' => $_SESSION['userid']]);
         $posts = R::find('posts', 'user_id LIKE :userid', [':userid' => $_SESSION['userid']]);
-
 
         $profileImg = $this->getProfileImg();
 
@@ -112,10 +109,9 @@ class UserController extends BaseController
         displayTwig('/user/profile.twig', ['profile' => $profile, 'posts' => $posts, 'profileImg' => $profileImg]);
     }
 
-    public function edit($id, $session, $error)
+    public function edit()
     {
-        $id = null;
-        $session = null;
+        $error = $_GET['error'] ?? null;
 
         $profile = R::find('users', 'id LIKE :userid', [':userid' => $_SESSION['userid']]);
 

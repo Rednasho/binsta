@@ -9,19 +9,22 @@
 3. Ga terug naar je schijf -> xampp -> apache -> conf -> extra -> httpd-vhosts.conf en plak het onderstaande onderaan het bestand:
     - Wijzig {locatie van de Repo} naar de volledige pad van waar je repo staat!
     - `<VirtualHost *:80>`\
-	    `DocumentRoot "{locatie van de Repo}"\`
-	    `ServerName binsta.test\`
-	    `<Directory "{locatie van de Repo}">\`
-		    `Options Indexes FollowSymLinks Includes ExecCGI\`
-        	`AllowOverride All`\
-        	`Order allow,deny`\
-        	`Allow from all`\
-		    `Require all granted`\
-	    `</Directory>`\
+        `DocumentRoot "{locatie van de Repo}"\`
+        `ServerName binsta.test\`
+        `<Directory "{locatie van de Repo}">\`
+            `Options Indexes FollowSymLinks Includes ExecCGI\`
+            `AllowOverride All`\
+            `Order allow,deny`\
+            `Allow from all`\
+            `Require all granted`\
+        `</Directory>`\
     `</VirtualHost>`
 4. Sla het bestand op en indien actief start je Apache opnieuw op.
-5. Ga nu naar je browser en typ in: http://binsta.test
-6. Je bevind je nu op de homepagina, als het goed is wertkt alles nu.
+5. Ga naar de commandline van je project repository en typ in: composer install
+6. Maak een nieuwe database aan genaamd binsta en maak een gebruikersaccount aan met de username en password als bit_academy
+7. Typ vervolgens op de commandline: php seeder.php
+8. Ga nu naar je browser en typ in: http://binsta.test
+9. Je bevind je nu op de homepagina, als het goed is wertkt alles nu.
 
 
 

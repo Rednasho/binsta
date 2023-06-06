@@ -4,6 +4,12 @@ require_once '../vendor/autoload.php';
 use RedBeanPHP\R as R;
 session_start();
 
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+
 R::setup(
     'mysql:host=localhost;dbname=binsta',
     'bit_academy',
@@ -11,8 +17,6 @@ R::setup(
 );
 
 $params = explode('/', $_GET['params']);
-$userId = $_SESSION['userid'] ?? null;
-$error = $_GET['error'] ?? null;
 
 // Defineer controller en controleer of deze bestaat
 $controllerName = $params[0] == "" ? "feed" : $params[0];
@@ -44,8 +48,10 @@ $id = isset($params[2]) && !empty($params[2]) ? $params[2] : null;
 if (method_exists($controller, $method)) {
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $controller->$method($id);
+    } elseif (empty($id)) {
+        $controller->$method();
     } else {
-        $controller->$method($id, $userId, $error);
+        $controller->$method($id);
     }
 } else {
     error(404, '"' . $method . '" is geen bestaande method!');

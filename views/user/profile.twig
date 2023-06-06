@@ -5,7 +5,6 @@
 {% endblock %}
 
 {% block content %}
-    {% for profileItem in profile %}
         <div class="flex flex-col items-center justify-center w-full">
             <div class="flex justify-between w-3/4 mt-10">
                 <div class="flex max-md:flex-col">
@@ -14,12 +13,12 @@
                     </div>
                     <div class="ms-10 flex flex-col max-md:ms-0 flex">
                         <div class="flex">
-                            <h1 class="text-3xl">{{ profileItem.username }}</h1>
+                            <h1 class="text-3xl">{{ profile.username }}</h1>
                             <a href="/user/edit">
                                 <i class="fa-solid fa-gear text-3xl ms-3 mt-1"></i>
                             </a>
                         </div>
-                        <p>{{ profileItem.bio }}</p>
+                        <p>{{ profile.bio }}</p>
                     </div>
                 </div>
                 <div>
@@ -40,7 +39,7 @@
                                 <p><span class="font-bold">{{ post.likes }}</span> likes</p>
                             </div>
                             <div class="flex flex-col ps-5 pb-5">
-                                <a href="" class="font-bold">{{ profileItem.username }}</a>
+                                <a href="" class="font-bold">{{ profile.username }}</a>
                                 <p class="pt-1 w-5/6">{{ post.description }}</p>
                             </div>
                         </div>
@@ -48,5 +47,4 @@
                 </div>
             </div>
         </div>
-    {% endfor %}
 {% endblock %}

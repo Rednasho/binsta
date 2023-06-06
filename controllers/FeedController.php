@@ -4,10 +4,8 @@ use RedBeanPHP\R as R;
 
 class FeedController extends BaseController
 {
-    public function index($id, $userid)
+    public function index()
     {
-        $id = null; // Moet van BLAST
-
         $posts = R::findAll('posts');
         $users = R::findAll('users');
         $comments = R::findAll('comments');
@@ -21,11 +19,11 @@ class FeedController extends BaseController
 
         $profileImg = $this->getProfileImg();
 
-        if (isset($userid)) {
+        if (isset($_SESSION['userid'])) {
             foreach ($posts as $post) {
                 $liked = false;
                 foreach ($likes as $like) {
-                    if ($like->post_id == $post->id && $like->user_id == $userid) {
+                    if ($like->post_id == $post->id && $like->user_id == $_SESSION['userid']) {
                         $liked = true;
                         break;
                     }

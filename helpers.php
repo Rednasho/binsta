@@ -2,8 +2,8 @@
 
 function displayTwig($template, $variables)
 {
-    $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/views');
-    $twig = new \Twig\Environment($loader);
+    $loader = new \Twig\Loader\FilesystemLoader('views', getcwd().'/..');
+    $twig = new \Twig\Environment($loader, ['debug' => true]);
     $twig->display($template, $variables);
 }
 

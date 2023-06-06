@@ -4,9 +4,9 @@ use RedBeanPHP\R as R;
 
 class PostController extends BaseController
 {
-    public function create($id)
+    public function create()
     {
-        $this->authorizeUser($id);
+        $this->authorizeUser($_SESSION['userid']);
 
         $profileImg = $this->getProfileImg();
 
@@ -21,8 +21,7 @@ class PostController extends BaseController
         $postBean->description = htmlspecialchars(trim($_POST['description']));
         $postBean->code_input = htmlspecialchars(trim($_POST['code-input']));
         $postBean->code_language = htmlspecialchars(trim($_POST['code-language']));
-        $userId = $_SESSION['userid'];
-        $postBean->user_id = $userId;
+        $postBean->user_id = $_SESSION['userid'];
         R::store($postBean);
 
 
