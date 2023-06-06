@@ -2,7 +2,7 @@
 
 function displayTwig($template, $variables)
 {
-    $loader = new \Twig\Loader\FilesystemLoader('views', getcwd().'/..');
+    $loader = new \Twig\Loader\FilesystemLoader('views', getcwd() . '/..');
     $twig = new \Twig\Environment($loader, ['debug' => true]);
     $twig->display($template, $variables);
 }
