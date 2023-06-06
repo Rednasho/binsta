@@ -46,13 +46,7 @@ $id = isset($params[2]) && !empty($params[2]) ? $params[2] : null;
 
 // Controleer of de gegeven method bestaat zo ja wordt deze verwerkt
 if (method_exists($controller, $method)) {
-    if ($_SERVER['REQUEST_METHOD'] == "POST") {
-        $controller->$method($id);
-    } elseif (empty($id)) {
-        $controller->$method();
-    } else {
-        $controller->$method($id);
-    }
+    $controller->$method($id !== null ? $id : null);
 } else {
     error(404, '"' . $method . '" is geen bestaande method!');
     exit();
