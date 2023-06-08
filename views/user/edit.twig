@@ -7,7 +7,7 @@
 {% block content %}
     {% for profileItem in profile %}
         <div class="flex w-full justify-center">
-            <div class="w-1/2 max-md:w-full flex flex-col items-center bg-white shadow-xl my-10 rounded-xl">
+            <div class="w-1/2 max-md:w-full flex flex-col items-center bg-white shadow-xl my-10 rounded-xl pb-10">
                 <div class="flex bg-blue-500 w-full text-white justify-center rounded-tr-xl rounded-tl-xl">
                     <h1 class="text-3xl w-3/4 font-bold py-5">Edit Profile</h1>
                 </div>
@@ -65,9 +65,6 @@
                         <p>Repeated password did not match!</p>
                     </div>
                 {% endif %}
-                <div class="flex w-full justify-end p-2 pe-5">
-                    <p class="pe-1">If you don't have an account</p><a href="/user/signup" class="text-blue-500 underline">Signup here!</a>
-                </div>
             </div>
         </div>
     {% endfor %}

@@ -7,7 +7,7 @@
 {% block content %}
     {% for userItem in user %}
         <div class="flex w-full justify-center">
-            <div class="w-1/2 max-md:w-full flex flex-col items-center bg-white shadow-xl mt-10 rounded-xl">
+            <div class="w-1/2 max-md:w-full flex flex-col items-center bg-white shadow-xl mt-10 mb-10 rounded-xl">
                 <div class="flex bg-blue-500 w-full text-white justify-center rounded-tr-xl rounded-tl-xl">
                     <h1 class="text-3xl w-3/4 font-bold py-5">Create Post</h1>
                 </div>
@@ -33,6 +33,11 @@
                         <input type="submit" value="Post" onclick="saveCodeSnippet()" class="bg-green-600 hover:bg-green-700 rounded cursor-pointer font-bold text-2xl w-full text-white py-2">
                     </div>
                 </form>
+                {% if error == 'emptyinput' %}
+                <div class="bg-red-300 rounded w-3/4 mb-5 py-3 text-center font-bold text-red-600">
+                    <p>Please fill in your code!</p>
+                </div>
+                {% endif %}
             </div>
         </div>
     {% endfor %}
